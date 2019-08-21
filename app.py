@@ -6,12 +6,13 @@ from dotenv import load_dotenv
 from flask import Flask, render_template 
 from nba_api.stats.endpoints import commonplayerinfo
 from nba_api.stats.static.players import find_players_by_full_name
+from nba_api.stats.static.teams import find_teams_by_full_name
 
 app = Flask(__name__)
 
 load_dotenv()
 
-def getProfileImage(name):    
+def getGoogleImage(name):    
     import requests
     import os
 
@@ -56,17 +57,25 @@ def nba():
 def nbaSearch():
     from flask import request
 
-    search_type =  request.form['search_type'];
+    search_type = request.form['search_type'];
     search_term = request.form['search_term'];
 
     result = [];
 
     if search_type == "Player":
+        # Returns result from db
         result = find_players_by_full_name(search_term);
 
         for player in result:
-            image = getProfileImage(player['full_name']);
+            image = getGoogleImage(player['full_name']);
             player['image'] = image;
+    elif search_type == "Team":
+        # Returns result from db
+        result = find_teams_by_full_name(search_term);
+
+        for team in result:
+            image = getGoogleImage(team['full_name']);
+            team['image'] = image;
     else :
         result = [];
 

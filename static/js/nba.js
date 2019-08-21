@@ -1,4 +1,5 @@
 const SEARCH_TYPE_OPTIONS = ["Player", "Team"];
+
 let searchType = SEARCH_TYPE_OPTIONS[0];
 
 function selectSearchOption(option) {
@@ -29,11 +30,11 @@ function handleSearch() {
         data: { search_term: searchTerm, search_type: searchType },
         type: 'POST',
         success: function(response) {
-            console.log(response);
+            // console.log(response);
             const data = JSON.parse(response).data
             if (data.length === 0) {
                 $("#searchResult > .card-columns").append("<h2 class='text-center'>Nothing Found</h2>")
-            } else {
+            } else if (searchType === 'Player') {
                 for (var i in data) {
                     let card = "<div class='card' style='width: 18rem;'><img src='http://www.suttonsilver.co.uk/wp-content/uploads/blog-harold-02.jpg' class='card-img-top' alt='Something' /><div class='card-body'><h5 class='card-title'></h5><p class='card-text'></p><a href='#' class='btn btn-primary'>More info</a></div></div>"
 
@@ -50,6 +51,16 @@ function handleSearch() {
                         $(".card-text").last().addClass("text-danger");
                         $(".card-body > a").last().attr("data-player-id", data[i].id);
                     } 
+                }
+            } else {
+                for (var i in data) {
+                    let card = "<div class='card' style='width: 18rem;'><img src='http://www.suttonsilver.co.uk/wp-content/uploads/blog-harold-02.jpg' class='card-img-top' alt='Something' /><div class='card-body'><h5 class='card-title'></h5><p class='card-text'></p><a href='#' class='btn btn-primary'>More info</a></div></div>"
+
+                    $("#searchResult > .card-columns").append(card)
+
+                    $(".card-title").last().html(data[i].full_name)
+                    $(".card-img-top").last().attr('src', data[i].image)
+
                 }
             }
         },
