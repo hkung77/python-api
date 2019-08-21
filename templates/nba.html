@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Home</title>
+
+        <!-- import jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+        <!-- import popper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+        <!-- import bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <script src="../static/js/nba.js" > </script>
+        <link rel="stylesheet" href="../static/css/card.css">
+
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1 class="display-4">My NBA Project</h1>
+            <p class="lead">Search for the latest and the oldest info about the NBA</p>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button id="searchType" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">variable</button>
+                    <div id="searchMenu" class="dropdown-menu">
+                    </div>
+                </div>
+                <input type="text" id="searchTerm" class="form-control" aria-label="Text input with dropdown button">
+                <div class="input-group-append">
+                    <button id="searchButton" class="btn btn-primary" type="button" id="button-addon2">Search</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="searchResult" class="container" hidden>
+        <div class="card-columns" >
+        </div>
+        </div>
+    </body>
+</html>
