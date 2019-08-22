@@ -19,6 +19,16 @@ function generateSearchOptions() {
     }
 }
 
+function onMorePlayerClick() {
+    const searchId = event.srcElement.getAttribute('data-player-id');
+    window.open(`/nba/player/${searchId}`);
+}
+
+function onMoreTeamClick() {
+    const searchId = event.srcElement.getAttribute('data-team-id');
+    window.open(`/nba/team/${searchId}`);
+}
+
 function handleSearch() {
     const searchTerm = $("#searchTerm")[0].value;
 
@@ -36,7 +46,7 @@ function handleSearch() {
                 $("#searchResult > .card-columns").append("<h2 class='text-center'>Nothing Found</h2>")
             } else if (searchType === 'Player') {
                 for (var i in data) {
-                    let card = "<div class='card' style='width: 18rem;'><img src='http://www.suttonsilver.co.uk/wp-content/uploads/blog-harold-02.jpg' class='card-img-top' alt='Something' /><div class='card-body'><h5 class='card-title'></h5><p class='card-text'></p><a href='#' class='btn btn-primary'>More info</a></div></div>"
+                    let card = "<div class='card' style='width: 18rem;'><img src='http://www.suttonsilver.co.uk/wp-content/uploads/blog-harold-02.jpg' class='card-img-top' alt='Something' /><div class='card-body'><h5 class='card-title'></h5><p class='card-text'></p><button onclick='onMorePlayerClick()' class='btn btn-primary'>More info</button></div></div>"
 
                     $("#searchResult > .card-columns").append(card)
 
@@ -45,22 +55,21 @@ function handleSearch() {
                     if (data[i].is_active) {
                         $(".card-text").last().html("ACTIVE");
                         $(".card-text").last().addClass("text-success");
-                        $(".card-body > a").last().attr("data-player-id", data[i].id);
                     } else {
                         $(".card-text").last().html("RETIRED");
                         $(".card-text").last().addClass("text-danger");
-                        $(".card-body > a").last().attr("data-player-id", data[i].id);
                     } 
+                    $(".card-body > button").last().attr("data-player-id", data[i].id);
                 }
             } else {
                 for (var i in data) {
-                    let card = "<div class='card' style='width: 18rem;'><img src='http://www.suttonsilver.co.uk/wp-content/uploads/blog-harold-02.jpg' class='card-img-top' alt='Something' /><div class='card-body'><h5 class='card-title'></h5><p class='card-text'></p><a href='#' class='btn btn-primary'>More info</a></div></div>"
+                    let card = "<div class='card' style='width: 18rem;'><img src='http://www.suttonsilver.co.uk/wp-content/uploads/blog-harold-02.jpg' class='card-img-top' alt='Something' /><div class='card-body'><h5 class='card-title'></h5><p class='card-text'></p><button onclick='onMoreTeamClick()' class='btn btn-primary'>More info</button></div></div>"
 
                     $("#searchResult > .card-columns").append(card)
 
                     $(".card-title").last().html(data[i].full_name)
                     $(".card-img-top").last().attr('src', data[i].image)
-
+                    $(".card-body > button").last().attr("data-team-id", data[i].id);
                 }
             }
         },

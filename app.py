@@ -50,8 +50,17 @@ def index():
 @app.route('/nba')
 
 def nba():
-    return render_template("nba.html");
+    return render_template("nba/index.html");
 
+@app.route('/nba/player/<id>')
+
+def nbaPlayer(id):
+    return render_template("nba/player.html");
+
+@app.route('/nba/team/<id>')
+
+def nbaTeam(id):
+    return render_template("nba/team.html");
 
 @app.route('/nbaSearch', methods=['POST'])
 def nbaSearch():
