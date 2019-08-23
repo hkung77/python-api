@@ -1,97 +1,69 @@
-import re
 import json
 import os
+import re
 
-from dotenv import load_dotenv
-from flask import Flask, render_template 
+from flask import Flask, render_template
 from nba_api.stats.endpoints import commonplayerinfo
 from nba_api.stats.static.players import find_players_by_full_name
 from nba_api.stats.static.teams import find_teams_by_full_name
 
+from image_search import getGoogleImage
+
 app = Flask(__name__)
-
-load_dotenv()
-
-def getGoogleImage(name):    
-    import requests
-    import os
-
-    key = os.getenv('GOOGLE_KEY');
-    
-    response = requests.get("https://www.googleapis.com/customsearch/v1",
-            params={
-                'q': name, 
-                'num': 1,
-                'start': 1,
-                'imgSize': "medium",
-                'searchType': "image",
-                'key': key,
-                'cx': "014045533171696612546:exxk4b7fi_w",
-                },
-            )
-
-    
-
-    # print(response.json());
-    try:
-        result = response.json().get('items')[0].get('link');
-    except:
-        result = 'http://www.suttonsilver.co.uk/wp-content/uploads/blog-harold-02.jpg';
-
-    # print(result)
-    return result;
-
 
 @app.route('/')
 
 def index():
-    return render_template("home.html");
+    return render_template("home.html")
 
 @app.route('/nba')
 
 def nba():
-    return render_template("nba/index.html");
+    return render_template("nba/index.html")
 
 @app.route('/nba/player/<id>')
 
 def nbaPlayer(id):
-    return render_template("nba/player.html");
+    return render_template("nba/player.html")
 
 @app.route('/nba/team/<id>')
 
 def nbaTeam(id):
-    return render_template("nba/team.html");
+    return render_template("nba/team.html")
 
-@app.route('/nbaSearch', methods=['POST'])
-def nbaSearch():
+@app.route('/teamSearch', methods=['POST'])
+def teamSearch():
     from flask import request
 
-    search_type = request.form['search_type'];
-    search_term = request.form['search_term'];
+    search_term = request.form['search_term']
 
-    result = [];
+    results = []
+    # Returns result from db
+    results = find_teams_by_full_name(search_term)
 
-    if search_type == "Player":
-        # Returns result from db
-        result = find_players_by_full_name(search_term);
+    for result in results:
+        image = getGoogleImage(result['full_name'])
+        result['image'] = image
 
-        for player in result:
-            image = getGoogleImage(player['full_name']);
-            player['image'] = image;
-    elif search_type == "Team":
-        # Returns result from db
-        result = find_teams_by_full_name(search_term);
+    return json.dumps({'status': 'OK', 'data': results})
 
-        for team in result:
-            image = getGoogleImage(team['full_name']);
-            team['image'] = image;
-    else :
-        result = [];
+@app.route('/playerSearch', methods=['POST'])
+def playerSearch():
+    from flask import request
 
-    return json.dumps({'status': 'OK', 'data': result});
+    search_term = request.form['search_term']
+
+    results = []
+
+    # Returns result from db
+    results = find_players_by_full_name(search_term)
+
+    for result in results:
+        image = getGoogleImage(result['full_name'])
+        result['image'] = image
+
+    return json.dumps({'status': 'OK', 'data': results})
 
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
-
-

@@ -29,24 +29,23 @@ function onMoreTeamClick() {
     window.open(`/nba/team/${searchId}`);
 }
 
-function handleSearch() {
-    const searchTerm = $("#searchTerm")[0].value;
+function setEmptyResult() {
+    $("#searchResult > .card-columns").append("<h2 class='text-center'>Nothing Found</h2>")
+}
 
-    // Clear results from screen
-    $("#searchResult > .card-columns").children().remove()
-
+function playerSearch(searchTerm) {
     $.ajax({
-        url: '/nbaSearch',
-        data: { search_term: searchTerm, search_type: searchType },
+        url: '/playerSearch',
+        data: { search_term: searchTerm },
         type: 'POST',
         success: function(response) {
             // console.log(response);
             const data = JSON.parse(response).data
-            if (data.length === 0) {
-                $("#searchResult > .card-columns").append("<h2 class='text-center'>Nothing Found</h2>")
-            } else if (searchType === 'Player') {
+             if (data.length === 0) {
+                 setEmptyResult();
+             } else {
                 for (var i in data) {
-                    let card = "<div class='card' style='width: 18rem;'><img src='http://www.suttonsilver.co.uk/wp-content/uploads/blog-harold-02.jpg' class='card-img-top' alt='Something' /><div class='card-body'><h5 class='card-title'></h5><p class='card-text'></p><button onclick='onMorePlayerClick()' class='btn btn-primary'>More info</button></div></div>"
+                    const card = "<div class='card' style='width: 18rem;'><img src='http://www.suttonsilver.co.uk/wp-content/uploads/blog-harold-02.jpg' class='card-img-top' alt='Something' /><div class='card-body'><h5 class='card-title'></h5><p class='card-text'></p><button onclick='onMorePlayerClick()' class='btn btn-primary'>More info</button></div></div>"
 
                     $("#searchResult > .card-columns").append(card)
 
@@ -61,9 +60,28 @@ function handleSearch() {
                     } 
                     $(".card-body > button").last().attr("data-player-id", data[i].id);
                 }
+             }
+        },
+        error: function(error) {
+            console.log(error);
+            setEmptyResult();
+        }
+    });
+}
+
+function teamSearch(searchTerm) {
+    $.ajax({
+        url: '/teamSearch',
+        data: { search_term: searchTerm },
+        type: 'POST',
+        success: function(response) {
+            // console.log(response);
+            const data = JSON.parse(response).data
+            if (data.length === 0) {
+                 setEmptyResult();
             } else {
                 for (var i in data) {
-                    let card = "<div class='card' style='width: 18rem;'><img src='http://www.suttonsilver.co.uk/wp-content/uploads/blog-harold-02.jpg' class='card-img-top' alt='Something' /><div class='card-body'><h5 class='card-title'></h5><p class='card-text'></p><button onclick='onMoreTeamClick()' class='btn btn-primary'>More info</button></div></div>"
+                    const card = "<div class='card' style='width: 18rem;'><img src='http://www.suttonsilver.co.uk/wp-content/uploads/blog-harold-02.jpg' class='card-img-top' alt='Something' /><div class='card-body'><h5 class='card-title'></h5><p class='card-text'></p><button onclick='onMoreTeamClick()' class='btn btn-primary'>More info</button></div></div>"
 
                     $("#searchResult > .card-columns").append(card)
 
@@ -74,11 +92,24 @@ function handleSearch() {
             }
         },
         error: function(error) {
-            console.log(error);
-            $("#searchResult > .card-columns").append("<h2 class='text-center'>Nothing Found</h2>")
+            // console.log(error);
+            setEmptyResult();
         }
     });
+}
 
+function handleSearch() {
+    const searchTerm = $("#searchTerm")[0].value;
+
+    // Clear results from screen
+    $("#searchResult > .card-columns").children().remove()
+
+    if (searchType === 'Player') {
+        playerSearch(searchTerm);
+    } else {
+        teamSearch(searchTerm);
+    }
+        
     $("#searchResult").removeAttr('hidden');
 }
 
