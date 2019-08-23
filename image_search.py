@@ -4,7 +4,7 @@ import os
 
 load_dotenv()
 
-def getGoogleImage(name):    
+def get_google_image(name):    
 
     key = os.getenv('GOOGLE_KEY')
     
