@@ -2,12 +2,12 @@ const SEARCH_TYPE_OPTIONS = ["Player", "Team"];
 
 let searchType = SEARCH_TYPE_OPTIONS[0];
 
-function selectSearchOption(option) {
+selectSearchOption = (option) => {
     searchType = option;
     document.getElementById('searchType').innerHTML = searchType;
 }
 
-function generateSearchOptions() {
+const generateSearchOptions = () => {
     var len = SEARCH_TYPE_OPTIONS.length;
     for (var i = 0; i < len; i++) {
         let option = "<span class='dropdown-item'>"+ SEARCH_TYPE_OPTIONS[i] + "</span>";
@@ -19,26 +19,26 @@ function generateSearchOptions() {
     }
 }
 
-function onMorePlayerClick() {
+const onMorePlayerClick = () => {
     const searchId = event.srcElement.getAttribute('data-player-id');
     window.open(`/nba/player/${searchId}`);
 }
 
-function onMoreTeamClick() {
+const onMoreTeamClick = () => {
     const searchId = event.srcElement.getAttribute('data-team-id');
     window.open(`/nba/team/${searchId}`);
 }
 
-function setEmptyResult() {
+const setEmptyResult = () => {
     $("#searchResult > .card-columns").append("<h2 class='text-center'>Nothing Found</h2>")
 }
 
-function playerSearch(searchTerm) {
+const playerSearch = (searchTerm) => {
     $.ajax({
         url: '/playerSearch',
         data: { search_term: searchTerm },
         type: 'POST',
-        success: function(response) {
+        success: (response) => {
             // console.log(response);
             const data = JSON.parse(response).data
              if (data.length === 0) {
@@ -62,19 +62,19 @@ function playerSearch(searchTerm) {
                 }
              }
         },
-        error: function(error) {
+        error: (error) => {
             console.log(error);
             setEmptyResult();
         }
     });
 }
 
-function teamSearch(searchTerm) {
+const teamSearch = (searchTerm) => {
     $.ajax({
         url: '/teamSearch',
         data: { search_term: searchTerm },
         type: 'POST',
-        success: function(response) {
+        success: (response) => {
             // console.log(response);
             const data = JSON.parse(response).data
             if (data.length === 0) {
@@ -91,14 +91,14 @@ function teamSearch(searchTerm) {
                 }
             }
         },
-        error: function(error) {
+        error: (error) => {
             // console.log(error);
             setEmptyResult();
         }
     });
 }
 
-function handleSearch() {
+const handleSearch = () => {
     const searchTerm = $("#searchTerm")[0].value;
 
     // Clear results from screen
@@ -115,7 +115,7 @@ function handleSearch() {
 
 
 
-$('document').ready(function(){
+$('document').ready(() => {
     document.getElementById('searchType').innerHTML = searchType;
 
     generateSearchOptions();

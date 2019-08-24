@@ -8,6 +8,7 @@ from nba_api.stats.static.players import find_players_by_full_name
 from nba_api.stats.static.teams import find_teams_by_full_name
 
 from image_search import get_google_image
+from nba import get_player_details
 
 app = Flask(__name__)
 
@@ -65,16 +66,13 @@ def player_search():
     return json.dumps({'status': 'OK', 'data': results})
 
 @app.route('/playerDetailsSearch', methods=['POST'])
-
 def player_details_search():
-# TODO:
-# Work in progess to obtain player details
+  from flask import request
 
-#   from flask import request
-#   player_id = request.form['player_id'] 
+  player_id = request.form['player_id'] 
+  result = get_player_details(player_id)
 
-#    result = commonplayerinfo(player_id)    
-#    puts(result);
+  return json.dumps({'status': 'OK', 'data': result})
 
 
 if __name__ == '__main__':

@@ -10,6 +10,7 @@ pylint = "*"
 nba-api = "*"
 flask = "*"
 python-dotenv = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"
