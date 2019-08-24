@@ -123,4 +123,11 @@ $('document').ready(function(){
     $("#searchButton").click(function() {
         handleSearch();
     });
+
+    // listener for when enter is pressed
+    $("#searchTerm").on('keyup', function (e) {
+        if (e.keyCode === 13) {
+            handleSearch();
+        }
+    });
 });
