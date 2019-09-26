@@ -6,9 +6,8 @@ from flask import Flask, render_template
 from nba_api.stats.endpoints import commonplayerinfo
 from nba_api.stats.static.players import find_players_by_full_name
 from nba_api.stats.static.teams import find_teams_by_full_name
-
 from image_search import get_google_image
-from nba import get_player_details
+from nba_search import get_player_details
 
 app = Flask(__name__)
 

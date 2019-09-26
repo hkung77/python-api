@@ -7,7 +7,9 @@ $('document').ready(() => {
         url: '/playerDetailsSearch',
         data: { player_id: playerId },
         type: 'POST',
-        success: (response) => {},
+        success: (response) => {
+            console.log(JSON.parse(response))
+        },
         error: (response) => {},
     });
 });
