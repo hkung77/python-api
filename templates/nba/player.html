@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
+
+<head>
     <meta charset="utf-8" />
     <title>NBA Stats Project</title>
 
@@ -8,19 +9,133 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
     <!-- import popper -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
 
 
     <!-- import bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
-    <script src="../../static/js/nba/player.js" > </script>
-   </head>
-   <body>
+    <script src="../../static/js/nba/player.js"> </script>
+</head>
+
+<body>
     <div class="jumbotron">
-        <h1 class="display-4">Player</h1>
+        <h1 id="player_name" class="display-4">Player</h1>
         <hr class="my-4">
     </div>
-   </body>
+    <div id="content" class="col-md-12 d-flex">
+        <div class="col-md-4 d-flex flex-column">
+            <div class="d-flex justify-content-between mx-5">
+                <p class=" font-weight-bold">Birthday: &nbsp; </p>
+                <p id="birthday" class="font-weight-light"></p>
+            </div>
+            <div class="d-flex justify-content-between mx-5 d-flex">
+                <p class="font-weight-bold">Country: &nbsp; </p>
+                <p id="country" class="font-weight-light"></p>
+            </div>
+            <div class="d-flex justify-content-between mx-5 d-flex">
+                <p class="font-weight-bold">Height: &nbsp; </p>
+                <p id="height" class="font-weight-light"></p>
+            </div>
+            <div class="d-flex justify-content-between mx-5 d-flex">
+                <p class="font-weight-bold">Weight: &nbsp; </p>
+                <p id="weight" class="font-weight-light"></p>
+            </div>
+            <div class="d-flex justify-content-between mx-5 d-flex">
+                <p class="font-weight-bold">University/College: &nbsp; </p>
+                <p id="school" class="font-weight-light"></p>
+            </div>
+            <div class="d-flex justify-content-between mx-5 d-flex">
+                <p class="font-weight-bold">Position: &nbsp; </p>
+                <p id="position" class="font-weight-light"></p>
+            </div>
+            <div class="d-flex justify-content-between mx-5 d-flex">
+                <p class="font-weight-bold">Team: &nbsp; </p>
+                <p id="team" class="font-weight-light"></p>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h3 class="mb-5">Overall Career Stats</h3>
+            <div class="d-flex border-bottom">
+                <div class="col-md-1">
+                    <p class="font-weight-bold">FGA</p>
+                    <p id="fga" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">FGM</p>
+                    <p id="fgm" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">FG%</p>
+                    <p id="fgp" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">FG3A</p>
+                    <p id="fg3a" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">FG3M</p>
+                    <p id="fg3m" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">FG3%</p>
+                    <p id="fg3p" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">FTA</p>
+                    <p id="fta" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">FTM</p>
+                    <p id="ftm" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">FT%</p>
+                    <p id="ftp" class="font-weight-light"></p>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="col-md-1">
+                    <p class="font-weight-bold">REB</p>
+                    <p id="reb" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">OREB</p>
+                    <p id="oreb" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">DREB</p>
+                    <p id="dreb" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">AST</p>
+                    <p id="ast" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">STL</p>
+                    <p id="stl" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">BLK</p>
+                    <p id="blk" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">TOV</p>
+                    <p id="tov" class="font-weight-light"></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold">PTS</p>
+                    <p id="pts" class="font-weight-light"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>
