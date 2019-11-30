@@ -52,7 +52,7 @@ $('document').ready(() => {
             document.getElementById('position').innerHTML = bio.POSITION;
             document.getElementById('team').innerHTML = `${bio.TEAM_CITY} ${bio.TEAM_NAME} ${bio.TO_YEAR}`;
 
-            insertStats(career, stats);
+            insertStats('career', stats);
 
         },
         error: (response) => {},
