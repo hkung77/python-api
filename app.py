@@ -16,26 +16,26 @@ app = Flask(__name__)
 def index():
     return render_template("home.html")
 
-@app.route('/nba')
+# @app.route('/nba')
 
-def nba():
-    return render_template("nba/index.html")
+# def nba():
+#     return render_template("nba/index.html")
 
-@app.route('/nba/player/<id>')
+# @app.route('/nba/player/<id>')
 
-def nba_player(id):
-    return render_template("nba/player.html")
+# def nba_player(id):
+#     return render_template("nba/player.html")
 
-@app.route('/nba/team/<id>')
+# @app.route('/nba/team/<id>')
 
-def nbaTeam(id):
-    return render_template("nba/team.html")
+# def nbaTeam(id):
+#     return render_template("nba/team.html")
 
 @app.route('/teamSearch', methods=['POST'])
 def team_search():
-    from flask import request
+    from flask import request, jsonify
 
-    search_term = request.form['search_term']
+    search_term = request.json['search_term']
 
     results = []
     # Returns result from db
@@ -45,13 +45,13 @@ def team_search():
         image = get_google_image(result['full_name'])
         result['image'] = image
 
-    return json.dumps({'status': 'OK', 'data': results})
+    return jsonify({'status': 'OK', 'data': results})
 
 @app.route('/playerSearch', methods=['POST'])
 def player_search():
-    from flask import request
+    from flask import request, jsonify
 
-    search_term = request.form['search_term']
+    search_term = request.json['search_term']
 
     results = []
 
@@ -62,16 +62,16 @@ def player_search():
         image = get_google_image(result['full_name'])
         result['image'] = image
 
-    return json.dumps({'status': 'OK', 'data': results})
+    return jsonify({'status': 'OK', 'data': results})
 
 @app.route('/playerDetailsSearch', methods=['POST'])
 def player_details_search():
-  from flask import request
+  from flask import request, jsonify
 
   player_id = request.form['player_id'] 
   result = get_player_details(player_id)
 
-  return json.dumps({'status': 'OK', 'data': result})
+  return jsonify({'status': 'OK', 'data': result})
 
 
 if __name__ == '__main__':
