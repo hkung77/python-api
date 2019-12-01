@@ -1,4 +1,4 @@
-# My Personal NBA Project
+# My API Server
 
 This project is using my own raspberry pi zero.
 
@@ -16,4 +16,4 @@ Libraries such as bootstrap, JQuery, AJAX are also used to make development more
 1. Utilizes the google image search api for finding player images.
 (Some players may not have the correct image associated to the player)
 
-2. NBA API for accessing stats and other related information
+2. Uses the NBA API for accessing stats and other related information
