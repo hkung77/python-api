@@ -31,11 +31,11 @@ def index():
 # def nbaTeam(id):
 #     return render_template("nba/team.html")
 
-@app.route('/teamSearch', methods=['POST'])
+@app.route('/nba/teamSearch', methods=['GET'])
 def team_search():
     from flask import request, jsonify
 
-    search_term = request.json['search_term']
+    search_term = request.args.get('search_term')
 
     results = []
     # Returns result from db
@@ -47,11 +47,11 @@ def team_search():
 
     return jsonify({'status': 'OK', 'data': results})
 
-@app.route('/playerSearch', methods=['POST'])
+@app.route('/nba/playerSearch/', methods=['GET'])
 def player_search():
     from flask import request, jsonify
 
-    search_term = request.json['search_term']
+    search_term = request.args.get('search_term')
 
     results = []
 
@@ -64,7 +64,7 @@ def player_search():
 
     return jsonify({'status': 'OK', 'data': results})
 
-@app.route('/playerDetailsSearch', methods=['POST'])
+@app.route('/nba/playerDetailsSearch', methods=['POST'])
 def player_details_search():
   from flask import request, jsonify
 
