@@ -3,7 +3,7 @@ import os
 import re
 
 from flask import Flask, render_template
-from flask_cors import CORS 
+from flask_cors import CORS, cross_origin 
 
 from nba_api.stats.endpoints import commonplayerinfo
 from nba_api.stats.static.players import find_players_by_full_name
@@ -34,6 +34,7 @@ def index():
 #     return render_template("nba/team.html")
 
 @app.route('/nba/teamSearch', methods=['GET'])
+@cross_origin()
 def team_search():
     from flask import request, jsonify
 
@@ -50,6 +51,7 @@ def team_search():
     return jsonify({'status': 'OK', 'data': results})
 
 @app.route('/nba/playerSearch/', methods=['GET'])
+@cross_origin()
 def player_search():
     from flask import request, jsonify
 
@@ -67,6 +69,7 @@ def player_search():
     return jsonify({'status': 'OK', 'data': results})
 
 @app.route('/nba/playerDetailsSearch', methods=['POST'])
+@cross_origin()
 def player_details_search():
   from flask import request, jsonify
 
