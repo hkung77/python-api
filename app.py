@@ -3,6 +3,8 @@ import os
 import re
 
 from flask import Flask, render_template
+from flask_cors import CORS 
+
 from nba_api.stats.endpoints import commonplayerinfo
 from nba_api.stats.static.players import find_players_by_full_name
 from nba_api.stats.static.teams import find_teams_by_full_name
@@ -10,9 +12,9 @@ from image_search import get_google_image
 from nba_search import get_player_details
 
 app = Flask(__name__)
+CORS(app, resources={r"/nba/*": {"origins": "nba.hkung.me"}}))
 
 @app.route('/')
-
 def index():
     return render_template("home.html")
 
