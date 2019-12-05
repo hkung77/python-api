@@ -12,7 +12,7 @@ from image_search import get_google_image
 from nba_search import get_player_details
 
 app = Flask(__name__)
-CORS(app, resources={r"/nba/*": {"origins": "nba.hkung.me"}}))
+CORS(app, resources={r"/nba/*": {"origins": "nba.hkung.me"}})
 
 @app.route('/')
 def index():
