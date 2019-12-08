@@ -73,7 +73,7 @@ def player_search():
 def player_details_search():
   from flask import request, jsonify
 
-  player_id = request.args.get['player_id'] 
+  player_id = request.args.get('player_id')
   result = get_player_details(player_id)
 
   return jsonify({'status': 'OK', 'data': result})
