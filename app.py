@@ -33,7 +33,7 @@ def index():
 # def nbaTeam(id):
 #     return render_template("nba/team.html")
 
-@app.route('/nba/teamSearch', methods=['GET'])
+@app.route('/nba/teamSearch/', methods=['GET'])
 @cross_origin()
 def team_search():
     from flask import request, jsonify
@@ -68,7 +68,7 @@ def player_search():
 
     return jsonify({'status': 'OK', 'data': results})
 
-@app.route('/nba/playerDetailsSearch', methods=['GET'])
+@app.route('/nba/playerDetailsSearch/', methods=['GET'])
 @cross_origin()
 def player_details_search():
   from flask import request, jsonify
