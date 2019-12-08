@@ -68,12 +68,12 @@ def player_search():
 
     return jsonify({'status': 'OK', 'data': results})
 
-@app.route('/nba/playerDetailsSearch', methods=['POST'])
+@app.route('/nba/playerDetailsSearch', methods=['GET'])
 @cross_origin()
 def player_details_search():
   from flask import request, jsonify
 
-  player_id = request.form['player_id'] 
+  player_id = request.args.get['player_id'] 
   result = get_player_details(player_id)
 
   return jsonify({'status': 'OK', 'data': result})
